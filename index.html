@@ -1,24 +1,156 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Daniel's Online Website</title>
-    <link rel="stylesheet" href="css/style.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine Glow</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #ffe6e6;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 48px;
+            margin: 20px 0;
+            color: #b30000;
+            text-shadow: 0 0 10px #ff6666, 0 0 20px #ff3333, 0 0 30px #ff1a1a;
+            animation: glowPulse 2s infinite alternate, moveText 3s infinite alternate;
+        }
+
+        #typingMessage {
+            font-size: 28px;
+            margin: 20px 0;
+            min-height: 40px;
+            color: #b30000;
+            text-shadow: 0 0 5px #ff9999, 0 0 10px #ff6666;
+            animation: glowPulse 2s infinite alternate;
+        }
+
+        button {
+            padding: 15px 30px;
+            font-size: 18px;
+            background-color: #ff4d4d;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-top: 20px;
+            animation: bounce 2s infinite alternate, glowPulse 2s infinite alternate;
+        }
+
+        button:hover {
+            background-color: #b30000;
+        }
+
+        .heart, .sparkle {
+            position: absolute;
+            user-select: none;
+            pointer-events: none;
+        }
+
+        .heart {
+            font-size: 20px;
+            animation: float 5s linear infinite;
+        }
+
+        .sparkle {
+            font-size: 10px;
+            color: #fff;
+            animation: sparkleMove 4s linear infinite;
+        }
+
+        /* Animations */
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+        }
+
+        @keyframes sparkleMove {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-120vh) rotate(180deg); opacity: 0; }
+        }
+
+        @keyframes bounce {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0); }
+        }
+
+        @keyframes glowPulse {
+            0% { text-shadow: 0 0 5px #ff6666, 0 0 10px #ff3333; }
+            50% { text-shadow: 0 0 15px #ff9999, 0 0 30px #ff4d4d; }
+            100% { text-shadow: 0 0 5px #ff6666, 0 0 10px #ff3333; }
+        }
+
+        @keyframes moveText {
+            0% { transform: translateX(0); }
+            50% { transform: translateX(10px); }
+            100% { transform: translateX(0); }
+        }
+    </style>
 </head>
 <body>
 
-    <nav>
-        <a href="index.html">Home</a> |
-        <a href="about.html">About</a> |
-        <a href="contact.html">Contact</a>
-    </nav>
+    <h1>I Love You So Much ❤️</h1>
+    <div id="typingMessage"></div>
+    <button onclick="showMore()">Click Me!</button>
+    <p id="extraMessage"></p>
 
-    <h1>Welcome to Cupids Website</h1>
-    <p>This website is ready to go online!</p>
+    <script>
+        // Typing Text
+        const message = "Happy Valentine’s Day! You are the most special person in my life! 💖🌹";
+        let index = 0;
+        function typeText() {
+            if(index < message.length) {
+                document.getElementById("typingMessage").innerHTML += message.charAt(index);
+                index++;
+                setTimeout(typeText, 100); // typing speed
+            }
+        }
+        typeText();
 
-    <img src="images/placeholder.png" alt="Placeholder Image">
+        // Button message
+        function showMore() {
+            document.getElementById("extraMessage").innerText = 
+            "You make my heart smile every single day! 🌹💌";
+        }
+        
+        // Floating Hearts
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.style.left = Math.random() * window.innerWidth + 'px';
+            heart.style.fontSize = (10 + Math.random() * 30) + 'px';
+            heart.style.animationDuration = (3 + Math.random() * 5) + 's';
+            heart.innerText = '❤️';
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 5000);
+        }
 
-    <button onclick="alert('Omo!')">Click Me</button>
+        // Sparkles
+        function createSparkle() {
+            const sparkle = document.createElement('div');
+            sparkle.className = 'sparkle';
+            sparkle.style.left = Math.random() * window.innerWidth + 'px';
+            sparkle.style.fontSize = (5 + Math.random() * 15) + 'px';
+            sparkle.style.animationDuration = (2 + Math.random() * 4) + 's';
+            sparkle.innerText = '✨';
+            document.body.appendChild(sparkle);
+            setTimeout(() => sparkle.remove(), 4000);
+        }
+
+        setInterval(createHeart, 300);
+        setInterval(createSparkle, 200);
+
+    </script>
 
 </body>
 </html>
